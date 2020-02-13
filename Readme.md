@@ -1,8 +1,6 @@
 # Usage
 
-Install corresponding fbxsdk    
-Place `fbx/fbx.so` in python path or project dir 
-
+Copy the content of `fbx/` in python path or project directory
 
 # Build 
  

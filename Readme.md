@@ -7,8 +7,7 @@ Copy the content of `fbx/` in python path or project directory
  `./build.sh`
 
 Configured for Python3_x64    
-Will install an old version of sip   
-Conda env or container with the current version of sip uninstalled is recommended    
+Will use an old version of sip without installing it    
 
 dependencies
 ```

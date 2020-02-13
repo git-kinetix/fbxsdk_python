@@ -14,25 +14,31 @@ wget -i "$scdir"/reqs.txt
 ls -1 *.tar.gz|xargs -L 1 tar -xvf
 rm *.tar.gz
 
-fbxsdkdir=fbxsdk
-mkdir $fbxsdkdir
-./fbx*fbxsdk_linux $fbxsdkdir
+fbxsdkdir="$builddir"/fbxsdk
+mkdir "$fbxsdkdir"
+./fbx*fbxsdk_linux "$fbxsdkdir"
 
-fbxpydir=fbxpy
-mkdir $fbxpydir
-./fbx*fbxpythonbindings_linux $fbxpydir
+fbxpydir="$builddir"/fbxpy
+mkdir "$fbxpydir"
+./fbx*fbxpythonbindings_linux "$fbxpydir"
 
-sipdir="sip-4.19.3"
-cd $sipdir
-python3 configure.py
+sipdir="$builddir/sip-4.19.3"
+cd "$sipdir"
+sipinstalldir="$builddir"/sipinstall
+mkdir "$sipinstalldir"
+python3 configure.py -b "$sipinstalldir" -d "$sipinstalldir" -e "$sipinstalldir" --pyidir="$sipinstalldir"
 make
 make install
 
-cd "$builddir/$fbxpydir"
+cd "$fbxpydir"
 cp "$scdir/PythonBindings.py" .
-export FBXSDK_ROOT="${builddir}/$fbxsdkdir"
-export SIP_ROOT="${builddir}/$sipdir"
+export FBXSDK_ROOT="$fbxsdkdir"
+export SIP_ROOT="$sipdir"
 python3 PythonBindings.py Python3_x64
 
+fbxdir="$scdir"/fbx
+[ -d "$fbxdir" ] || mkdir "$fbxdir"
+cp "$fbxpydir"/build/Distrib/site-packages/fbx/* "$fbxdir"
+cp "$sipinstalldir"/sip.so "$fbxdir"
 
 cd "$origdir"

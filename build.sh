@@ -11,6 +11,7 @@ builddir="$scdir"/build
 cd "$builddir"
 
 wget -i "$scdir"/reqs.txt
+cp "${scdir}/sip*.tar.gz" "${builddir}"
 ls -1 *.tar.gz|xargs -L 1 tar -xvf
 rm *.tar.gz
 

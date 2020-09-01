@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -xe
+set -x
 
 origdir=$(pwd)
 cd $(dirname $0)
@@ -10,7 +10,7 @@ builddir="$scdir"/build
 
 cd "$builddir"
 
-wget -i "$scdir"/reqs.txt
+wget -nc -i "$scdir"/reqs.txt
 cp ${scdir}/sip*.tar.gz "${builddir}"
 ls -1 *.tar.gz|xargs -L 1 tar -xvf
 rm *.tar.gz
@@ -20,7 +20,7 @@ mkdir "$fbxsdkdir"
 ./fbx*fbxsdk_linux "$fbxsdkdir"
 
 fbxpydir="$builddir"/fbxpy
-mkdir "$fbxpydir"
+mkdir "$fbxpydir" 2>/dev/null
 ./fbx*fbxpythonbindings_linux "$fbxpydir"
 
 sipdir="$builddir/sip-4.19.3"

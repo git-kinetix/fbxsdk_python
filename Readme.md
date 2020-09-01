@@ -12,7 +12,7 @@ Will use an old version of sip without installing it
 
 dependencies
 ```
-lib1g-dev
+zlib1g-dev
 libxml2-dev
 make
 gcc

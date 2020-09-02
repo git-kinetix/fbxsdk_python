@@ -17,11 +17,11 @@ rm *.tar.gz
 
 fbxsdkdir="$builddir"/fbxsdk
 mkdir "$fbxsdkdir"
-./fbx*fbxsdk_linux "$fbxsdkdir"
+printf "yes\nn\n" |./fbx*fbxsdk_linux "$fbxsdkdir"
 
 fbxpydir="$builddir"/fbxpy
 mkdir "$fbxpydir" 2>/dev/null
-./fbx*fbxpythonbindings_linux "$fbxpydir"
+printf "yes\nn\n" |./fbx*fbxpythonbindings_linux "$fbxpydir"
 
 sipdir="$builddir/sip-4.19.3"
 cd "$sipdir"

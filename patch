@@ -1,0 +1,11 @@
+--- build/sip-4.19.3/sipconfig.py	2020-09-07 16:32:28.705102626 +0000
++++ build/sip-4.19.3/sipconfig.py.mod	2020-09-07 16:34:40.533102626 +0000
+@@ -531,7 +531,7 @@
+             if self._qt:
+                 libs.extend(self._dependent_libs(l))
+ 
+-        libs.extend(self.optional_list("LIBS"))
++        libs = self.optional_list("LIBS") + libs
+ 
+         rpaths = _UniqueList()
+ 

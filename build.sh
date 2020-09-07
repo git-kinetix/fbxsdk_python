@@ -3,43 +3,37 @@
 set -x
 
 origdir=$(pwd)
-cd $(dirname $0)
-scdir=$(pwd)
+scdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 builddir="$scdir"/build
+sipdir="$builddir/sip-4.19.3"
+fbxsdkdir="$builddir"/fbxsdk
+fbxpydir="$builddir"/fbxpy
+sipinstalldir="$builddir"/sipinstall
 [ -d "$builddir" ] || mkdir "$builddir"
 
-cd "$builddir"
-
 wget -nc -i "$scdir"/reqs.txt
-cp ${scdir}/sip*.tar.gz "${builddir}"
-ls -1 *.tar.gz|xargs -L 1 tar -xvf
+ls -1 *.tar.gz|while read a;do tar -xvzf "$a" -C "$builddir";done
 rm *.tar.gz
 
-fbxsdkdir="$builddir"/fbxsdk
-mkdir "$fbxsdkdir"
-printf "yes\nn\n" |./fbx*fbxsdk_linux "$fbxsdkdir"
+[ -d "$fbxsdkdir" ] || mkdir "$fbxsdkdir"
+printf "yes\nn\n" |"$builddir"/fbx*fbxsdk_linux "$fbxsdkdir"
 
-fbxpydir="$builddir"/fbxpy
-mkdir "$fbxpydir" 2>/dev/null
-printf "yes\nn\n" |./fbx*fbxpythonbindings_linux "$fbxpydir"
+[ -d "$fbxpydir" ] || mkdir "$fbxpydir"
+printf "yes\nn\n" |"$builddir"/fbx*fbxpythonbindings_linux "$fbxpydir"
 
-sipdir="$builddir/sip-4.19.3"
+[ -d "$sipinstalldir" ] || mkdir "$sipinstalldir"
 cd "$sipdir"
-sipinstalldir="$builddir"/sipinstall
-mkdir "$sipinstalldir"
-python3 configure.py -b "$sipinstalldir" -d "$sipinstalldir" -e "$sipinstalldir" --pyidir="$sipinstalldir"
-make
-make install
+python3  "${sipdir}"/configure.py -b "$sipinstalldir" -d "$sipinstalldir" -e "$sipinstalldir" --pyidir="$sipinstalldir"
+make --debug -C"${sipdir}"
+make install --debug -C"${sipdir}"
+cd "$origdir"
 
-cd "$fbxpydir"
-cp "$scdir/PythonBindings.py" .
-export FBXSDK_ROOT="$fbxsdkdir"
-export SIP_ROOT="$sipdir"
-python3 PythonBindings.py Python3_x64
+patch -p0 < patch
+
+cp "$scdir/PythonBindings.py" "$fbxpydir"
+FBXSDK_ROOT="$fbxsdkdir" SIP_ROOT="$sipdir" python3 "$fbxpydir"/PythonBindings.py Python3_x64
 
 fbxdir="$scdir"/fbx
 [ -d "$fbxdir" ] || mkdir "$fbxdir"
 cp "$fbxpydir"/build/Distrib/site-packages/fbx/* "$fbxdir"
 cp "$sipinstalldir"/sip.so "$fbxdir"
-
-cd "$origdir"

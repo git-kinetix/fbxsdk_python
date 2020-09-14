@@ -20,10 +20,7 @@ echo "Download and install Visual Studio Build Tools (nmake, MSVC, link, etc.)"
 
 curl -L -o %vs_buildtoolsexe% https://aka.ms/vs/16/release/vs_buildtools.exe
 
-%vs_buildtoolsexe% --quiet --wait --norestart --nocache --installPath "%BUILDTOOLSDIR%" --remove Microsoft.VisualStudio.Component.Windows10SDK.10240 --remove Mi
-crosoft.VisualStudio.Component.Windows10SDK.10586 --remove Microsoft.VisualStudio.Component.Windows10SDK.14393 --remove Microsoft.VisualStudio.Component.Windows
-81SDK --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows10SDK
-|| IF "%ERRORLEVEL%"=="3010" EXIT 0
+%vs_buildtoolsexe% --quiet --wait --norestart --nocache --installPath "%BUILDTOOLSDIR%" --remove Microsoft.VisualStudio.Component.Windows10SDK.10240 --remove Microsoft.VisualStudio.Component.Windows10SDK.10586 --remove Microsoft.VisualStudio.Component.Windows10SDK.14393 --remove Microsoft.VisualStudio.Component.Windows81SDK --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows10SDK|| IF "%ERRORLEVEL%"=="3010" EXIT 0
 
 
 echo "Load environment variables to use Build Tools from this script"
@@ -50,9 +47,6 @@ python "%FBXSDKPYTHONDIR%"/PythonBindings.py Python3_x64
 copy "%FBXSDKPYTHONDIR%\build\Distrib\site-packages\fbx\*" "%FBXDIR%"
 copy "%SIPINSTALLDIR%\sip.pyd" "%FBXDIR%"
 
-%vs_buildtoolsexe% uninstall --quiet --wait --norestart --nocache --installPath "%BUILDTOOLSDIR%" --remove Microsoft.VisualStudio.Component.Windows10SDK.10240 -
--remove Microsoft.VisualStudio.Component.Windows10SDK.10586 --remove Microsoft.VisualStudio.Component.Windows10SDK.14393 --remove Microsoft.VisualStudio.Compone
-nt.Windows81SDK --remove Microsoft.VisualStudio.Workload.VCTools --remove Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --remove Microsoft.VisualStudio.Comp
-onent.Windows10SDK || IF "%ERRORLEVEL%"=="3010" EXIT 0
+%vs_buildtoolsexe% uninstall --quiet --wait --norestart --nocache --installPath "%BUILDTOOLSDIR%" --remove Microsoft.VisualStudio.Component.Windows10SDK.10240 --remove Microsoft.VisualStudio.Component.Windows10SDK.10586 --remove Microsoft.VisualStudio.Component.Windows10SDK.14393 --remove Microsoft.VisualStudio.Component.Windows81SDK --remove Microsoft.VisualStudio.Workload.VCTools --remove Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --remove Microsoft.VisualStudio.Component.Windows10SDK || IF "%ERRORLEVEL%"=="3010" EXIT 0
 popd
 pause

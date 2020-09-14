@@ -32,8 +32,10 @@ sudo apt install make gcc python3-dev zlib1g-dev libxml2-dev
 
 ### Windows
 
-1. Execute the `build.bat` file, or run it as Administrator Right-Click > Run as Administrator to bypass the authorizations requests
+1. Execute the `build.bat` file, or run it as Administrator Right-Click > Run as Administrator to skip the authorizations requests. Windows might prevent the execution of the script with a message "Windows protected your PC", to bypass it click "More Info", and then "Run Anyway"
 
-There is no dependencies, installing Visual Studio is not necessary, the script will download and install the needed building tools and remove them once it's done
 
 2. Binaries are outputed to the `fbxsdkpy-cpPYTHONVERSION-win_x64` directory. You can follow the Install instructions from step 3 with the files in this directory
+
+
+There is no dependencies, installing Visual Studio is not necessary, the script will download and install the needed building tools and remove them once it's done

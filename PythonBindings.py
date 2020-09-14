@@ -19,7 +19,7 @@ EXTRA_LIBS             = []
 
 # link with FBX SDK library built with VisualStudio 2015 by default
 vcCompiler = "vc140"
-vsCompiler = "vs2015"
+vsCompiler = "vs2017"
 
 # default supported python modules.
 # The script is decomposing the module to figure out what it needs to build. If more (or different modules) are

@@ -33,7 +33,7 @@ patch -p0 < patch
 cp "$scdir/PythonBindings.py" "$fbxpydir"
 FBXSDK_ROOT="$fbxsdkdir" SIP_ROOT="$sipdir" python3 "$fbxpydir"/PythonBindings.py Python3_x64
 
-pyvers=$(python3 --version | cut -d' ' -f2)
+pyvers=$(python3 --version 2>&1 | cut -d' ' -f2)
 pyvers=${pyvers%.*}
 pyvers=${pyvers//./}
 fbxdir="$scdir"/fbxsdkpy-cp${pyvers}-gnu_linux_x64

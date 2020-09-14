@@ -38,7 +38,7 @@ for /F "tokens=1,2 delims=;" %%i in (reqs_win.txt) do (
 
 tar xvf sip-4.19.3.tar.gz -C "%BUILDDIR%"
 cd "%BUILDDIR%"\sip-*
-python  "configure.py" -b "%SIPINSTALLDIR%" -d "%SIPINSTALLDIR%" -e "%SIPINSTALLDIR%" --pyidir="%SIPINSTALLDIR%"
+python  "configure.py" -b "%SIPINSTALLDIR%" -d "%SIPINSTALLDIR%" -e "%SIPINSTALLDIR%" --pyidir="%SIPINSTALLDIR%" --sip-module="fbxsip"
 nmake
 nmake install
 cd %CURRENTDIR%

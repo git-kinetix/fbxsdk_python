@@ -1,7 +1,7 @@
 # FBXSDK Python Bindings
 
 This repository contains scripts to build the FBXSDK Python Bindings for various platforms    
-**Pre-built binaries are available on the [Releases page](https://gitlab.inria.fr/radili/fbxsdk_python/-/release://gitlab.inria.fr/radili/fbxsdk_python/-/releases)**
+**Pre-built binaries are available on the [Releases page](https://gitlab.inria.fr/radili/fbxsdk_python/-/releases)**
 
 ## Install
 

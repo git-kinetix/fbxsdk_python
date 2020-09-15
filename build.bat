@@ -8,7 +8,9 @@ SET "SIPINSTALLDIR=%BUILDDIR%\sipinstall"
 SET "vs_buildtoolsexe=%BUILDDIR%\vs_buildtools.exe"
 SET "FBXSDKDIR=%BUILDDIR%\fbxsdk"
 SET "FBXSDKPYTHONDIR=%BUILDDIR%\fbxsdkpy"
-SET "FBXDIR=%CURRENTDIR%\fbx"
+:: PYTHONVERSION=$(python -c [...]) #lol
+for /f %%i in ('python -c "import sys; print(''.join(sys.version.split(' ')[0].split('.')[:2]))"') do set PYTHONVERSION=%%i
+SET "FBXDIR=%CURRENTDIR%\fbxsdkpy-cp%PYTHONVERSION%-win_x64"
 mkdir "%BUILDDIR%"
 mkdir "%BUILDTOOLSDIR%"
 mkdir "%SIPINSTALLDIR%"
@@ -40,10 +42,10 @@ nmake
 nmake install
 cd %CURRENTDIR%
 
-copy "PythonBindings.py" "%FBXSDKPYTHONDIR%/PythonBindings.py"
+copy "PythonBindings.py" "%FBXSDKPYTHONDIR%\PythonBindings.py"
 SET "FBXSDK_ROOT=%FBXSDKDIR%"
 SET "SIP_ROOT=%SIPDIR%"
-python "%FBXSDKPYTHONDIR%"/PythonBindings.py Python3_x64
+python "%FBXSDKPYTHONDIR%"\PythonBindings.py Python3_x64
 copy "%FBXSDKPYTHONDIR%\build\Distrib\site-packages\fbx\*" "%FBXDIR%"
 copy "%SIPINSTALLDIR%\fbxsip.pyd" "%FBXDIR%"
 

@@ -45,7 +45,7 @@ SET "FBXSDK_ROOT=%FBXSDKDIR%"
 SET "SIP_ROOT=%SIPDIR%"
 python "%FBXSDKPYTHONDIR%"/PythonBindings.py Python3_x64
 copy "%FBXSDKPYTHONDIR%\build\Distrib\site-packages\fbx\*" "%FBXDIR%"
-copy "%SIPINSTALLDIR%\sip.pyd" "%FBXDIR%"
+copy "%SIPINSTALLDIR%\fbxsip.pyd" "%FBXDIR%"
 
 %vs_buildtoolsexe% uninstall --quiet --wait --norestart --nocache --installPath "%BUILDTOOLSDIR%" --remove Microsoft.VisualStudio.Component.Windows10SDK.10240 --remove Microsoft.VisualStudio.Component.Windows10SDK.10586 --remove Microsoft.VisualStudio.Component.Windows10SDK.14393 --remove Microsoft.VisualStudio.Component.Windows81SDK --remove Microsoft.VisualStudio.Workload.VCTools --remove Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --remove Microsoft.VisualStudio.Component.Windows10SDK || IF "%ERRORLEVEL%"=="3010" EXIT 0
 popd

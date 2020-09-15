@@ -5,7 +5,7 @@ This repository contains scripts to build the FBXSDK Python Bindings for various
 
 ## Install
 
-1. Download from the [Release Page](https://gitlab.inria.fr/radili/fbxsdk_python/-/releases) the archive `fbxsdkpy-cpPYTHONVERSION-PLATFORM` corresponding to your `PYTHONVERSION` and `PLATFORM`. `PYTHONVERSION` 35 corresponds to any 3.5 version of Python for example. The version of Python can be found with `python --version`
+1. Download from the [Releases Page](https://gitlab.inria.fr/radili/fbxsdk_python/-/releases) the archive `fbxsdkpy-cpPYTHONVERSION-PLATFORM` corresponding to your `PYTHONVERSION` and `PLATFORM`. `PYTHONVERSION` 35 corresponds to any 3.5 version of Python for example. The version of Python can be found with `python --version`
 2. Extract it
 3. Move the content of the extracted directory (not the directory itself) in either the `sites-package` directory or directly in your project directory. The path of the `sites-package` directory is generally present in the Python path, which can be obtained using `python -c "import sys; print(sys.path)"`
 

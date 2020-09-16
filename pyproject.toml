@@ -1,0 +1,19 @@
+# Specify sip v5 as the build system for the package.
+[build-system]
+requires = ["sip >=5, <6", "auditwheel"]
+build-backend = "sipbuild.api"
+
+# Specify the PEP 566 metadata for the project.
+[tool.sip.metadata]
+name = "fbxsdkpy"
+
+# Configure the building of the fib bindings.
+[tool.sip.bindings.fbx_module]
+headers = ["fbxsdk.h"]
+include-dirs = ["build/fbxsdk/include"]
+libraries = ["fbxsdk"]
+library-dirs = ["build/fbxsdk/lib/gcc/x64/release"]
+
+[tool.sip.project]
+sip-files-dir = "build/fbxpy/sip"
+wheel-includes = ["build/fbxpy/common/FbxCommon.py"]

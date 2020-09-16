@@ -1,11 +1,117 @@
---- build/sip-4.19.3/sipconfig.py	2020-09-07 16:32:28.705102626 +0000
-+++ build/sip-4.19.3/sipconfig.py.mod	2020-09-07 16:34:40.533102626 +0000
-@@ -531,7 +531,7 @@
-             if self._qt:
-                 libs.extend(self._dependent_libs(l))
+diff --git build/fbxpy/sip/fbxmanager.sip build/fbxpy/sip/fbxmanager.sip
+index c0385df..229fff5 100644
+--- build/fbxpy/sip/fbxmanager.sip
++++ build/fbxpy/sip/fbxmanager.sip
+@@ -18,7 +18,7 @@ public:
+     FbxUserNotification* GetUserNotification() const;
+     void SetUserNotification(FbxUserNotification* pUN);
+     
+-    virtual FbxIOSettings * GetIOSettings();
++    FbxIOSettings * GetIOSettings();
+     virtual void SetIOSettings(FbxIOSettings * pIOSettings);
  
--        libs.extend(self.optional_list("LIBS"))
-+        libs = self.optional_list("LIBS") + libs
+     FbxIOPluginRegistry* GetIOPluginRegistry() const;
+diff --git build/fbxpy/sip/fbxobject.sip build/fbxpy/sip/fbxobject.sip
+index a594570..ed35567 100644
+--- build/fbxpy/sip/fbxobject.sip
++++ build/fbxpy/sip/fbxobject.sip
+@@ -212,7 +212,7 @@ public:
+       * \param pCloneType The type of clone to be created.
+       * \return The new clone, or NULL (if the specified clone type is not supported).
+       */
+-    virtual FbxObject* Clone(FbxObject::ECloneType pCloneType, FbxObject* pContainer) const;
++    FbxObject* Clone(FbxObject::ECloneType pCloneType, FbxObject* pContainer) const;
  
-         rpaths = _UniqueList()
+     /** Checks if this object is a reference clone of another object.
+       * \return \c True if this object is a clone of another object, \c false otherwise
+@@ -428,7 +428,7 @@ public:
+     
+     virtual const char * Localize( const char * pID, const char * pDefault = NULL ) const;
+     virtual FbxString GetUrl() const;
+-    virtual bool    SetUrl(char *pUrl);
++    bool    SetUrl(char *pUrl);
  
+     enum EObjectFlag
+     {
+diff --git build/fbxpy/sip/fbxreader.sip build/fbxpy/sip/fbxreader.sip
+index c670587..1f00c3c 100644
+--- build/fbxpy/sip/fbxreader.sip
++++ build/fbxpy/sip/fbxreader.sip
+@@ -120,7 +120,7 @@ public:
+       * \return A pointer to IOSettings used for this reader or NULL if the object
+       * has not been allocated.
+     */
+-    virtual FbxIOSettings * GetIOSettings();
++    FbxIOSettings * GetIOSettings();
+ 
+ 	/** Set the IOSettings pointer to be used for this reader instance.
+       * \param pIOSettings  
+@@ -131,4 +131,4 @@ public:
+       * \param pProgress     FbxProgress to store the progress information.
+       */
+     virtual void SetProgressHandler(FbxProgress *pProgress);
+-};
+\ No newline at end of file
++};
+diff --git build/fbxpy/sip/fbxtypes.sip build/fbxpy/sip/fbxtypes.sip
+index a4f4350..02df462 100644
+--- build/fbxpy/sip/fbxtypes.sip
++++ build/fbxpy/sip/fbxtypes.sip
+@@ -27,14 +27,6 @@ enum EFbxType
+ 	eFbxTypeCount	//!< Indicates the number of type identifiers constants.
+ };
+ 
+-%If (FBX_X86)
+-typedef unsigned int size_t;
+-%End
+-
+-%If (FBX_X64)
+-typedef unsigned long size_t;
+-%End
+-
+     class FbxBlob
+     {
+         public:
+diff --git build/fbxpy/sip/fbxvector2.sip build/fbxpy/sip/fbxvector2.sip
+index d0c7b47..53cb2ed 100644
+--- build/fbxpy/sip/fbxvector2.sip
++++ build/fbxpy/sip/fbxvector2.sip
+@@ -27,11 +27,10 @@ public:
+     FbxVector2 operator *(double pValue) const;
+     FbxVector2 & operator *=(double pValue);
+     FbxVector2 & operator /=(double pValue);
+-     bool operator==(const FbxVector2 & pVector) const;
++    bool operator==(const FbxVector2 & pVector) const;
+     bool operator!=(const FbxVector2 & pVector) const;
+ 
+     FbxVector2 __truediv__(double pValue) const;
+-    FbxVector2 __div__(double pValue) const;
+     
+     SIP_PYOBJECT __str__() const;
+ %MethodCode
+diff --git build/fbxsdk/include/fbxsdk/fileio/fbx/fbxio.h build/fbxsdk/include/fbxsdk/fileio/fbx/fbxio.h
+index 3326b14..40134ff 100644
+--- build/fbxsdk/include/fbxsdk/fileio/fbx/fbxio.h
++++ build/fbxsdk/include/fbxsdk/fileio/fbx/fbxio.h
+@@ -1709,16 +1709,17 @@ public:
+ *****************************************************************************************************************************/
+ #ifndef DOXYGEN_SHOULD_SKIP_THIS
+     bool ProjectOpen (FbxFile * pFile, FbxReader* pReader, bool pCheckCRC = false, bool pOpenMainSection = true, FbxIOFileHeaderInfo* pFileHeaderInfo = NULL);
+-	FbxStatus& GetStatus() { return mStatus; }
++	FbxStatus& GetStatus() { return *mStatus; }
+ 
+     int GetTCDefinition();
+     bool NeedTCConversion();
+ 
+-private:
+     // to resolve warning C4512: 'class' : assignment operator could not be generated
+-    FbxIO& operator=(const FbxIO& pOther);
++    // FbxIO& operator=(const FbxIO& pOther);
++
++private:
+ 
+-    FbxStatus& mStatus;
++    FbxStatus* mStatus;
+ 
+     struct InternalImpl;
+ 	struct InternalImpl32;

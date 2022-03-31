@@ -1,12 +1,12 @@
 # Specify sip v5 as the build system for the package.
 [build-system]
-requires = ["sip >=5", "auditwheel"]
+requires = ["sip >=5", "auditwheel", "patch"]
 build-backend = "sipbuild.api"
 
 # Specify the PEP 566 metadata for the project.
 [tool.sip.metadata]
 name = "fbxsdkpy"
-version = "2020.1.post1"
+version = "2020.1.post2"
 
 # Configure the building of the fib bindings.
 [tool.sip.bindings.fbx_module]

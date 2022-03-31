@@ -119,8 +119,10 @@ class FBXSDKBuilder(Builder):
 
         if sys.platform == "linux":
             linux_static_libs = [ os.path.abspath(a) for a in project.linux_static_libraries ]
+            extra_compile_args = [ "-std=c++11" ]
         else:
             linux_static_libs = []
+            extra_compile_args = []
 
 
         module_builder.extensions = [
@@ -129,7 +131,8 @@ class FBXSDKBuilder(Builder):
                     include_dirs=buildable.include_dirs,
                     libraries=buildable.libraries,
                     library_dirs=buildable.library_dirs,
-                    extra_link_args=linux_static_libs)]
+                    extra_link_args=linux_static_libs,
+			extra_compile_args=extra_compile_args)]
 
         project.progress(
                 "Compiling the '{0}' module".format(buildable.fq_name))

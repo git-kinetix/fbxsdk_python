@@ -13,7 +13,10 @@ version = "2020.1"
 headers = ["fbxsdk.h"]
 include-dirs = ["build/fbxsdk/include"]
 libraries = ["fbxsdk"]
-library-dirs = ["build/fbxsdk/lib/gcc/x64/release"]
+library-dirs = ["build/fbxsdk/lib/all/x64/release"]
+win-libraries = ["libfbxsdk-md", "zlib-md", "libxml2-md", "Advapi32", "Wininet"]
+win-py36-libraries = ["libfbxsdk-mt", "zlib-mt", "libxml2-mt", "Advapi32", "Wininet"]
+linux-libraries = ["build/fbxsdk/lib/all/x64/release"]
 
 [tool.sip.project]
 sip-files-dir = "build/fbxpy/sip"

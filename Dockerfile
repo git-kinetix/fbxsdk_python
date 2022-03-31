@@ -6,4 +6,6 @@ VOLUME /build
 
 WORKDIR /build
 
+RUN yum -y install libxml2-devel zlib-devel
+
 CMD ./buildall.sh

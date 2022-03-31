@@ -12,7 +12,7 @@ fbxpydir="$builddir"/fbxpy
 [ -d "$builddir" ] || mkdir "$builddir"
 
 # Download fbxsdk and fbxsdk python bindings
-wget -nc -i "$scdir"/reqs.txt
+while read l; do curl -L -O $l; done < "$scdir"/reqs.txt
 ls -1 *.tar.gz|while read a;do tar -xvzf "$a" -C "$builddir";done
 rm fbx*.tar.gz
 

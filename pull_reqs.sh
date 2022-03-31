@@ -20,7 +20,7 @@ then
   url=$(grep 'fbx.*fbxsdk' $reqsfile|cut -d';' -f 2)
   file=${url##*/}
   tar="${fbxsdkdir}/${file}"
-  curl -L -o "$tar" $url
+  curl -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0' -L -o "$tar" $url
   tar -xvzf "$tar" -C "$fbxsdkdir"
   printf "yes\nn\n" |"$fbxsdkdir"/fbx*fbxsdk_linux "$fbxsdkdir" >/dev/null 2>&1
   # patch libfbxsdk.so because it is not linked against libxml2 and libz for some reason  
@@ -38,7 +38,7 @@ then
   url=$(grep 'fbx.*fbxpythonbindings_linux' $reqsfile|cut -d';' -f 2)
   file=${url##*/}
   tar="${fbxpydir}/${file}"
-  curl -L -o "$tar" $url
+  curl -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0' -L -o "$tar" $url
   tar -xvzf "$tar" -C "$fbxpydir"
   printf "yes\nn\n"|"$fbxpydir"/fbx*fbxpythonbindings_linux "$fbxpydir" >/dev/null 2>&1
 

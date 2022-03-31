@@ -22,4 +22,4 @@ linux-libraries = ["xml2", "z"]
 linux-static-libraries = ["build/fbxsdk/lib/all/x64/release/libfbxsdk.a"]
 win-libraries = ["libfbxsdk-md", "zlib-md", "libxml2-md", "Advapi32", "Wininet"]
 builder-factory = "builder.py"
-sdist-excludes = ["Dockerfile", "buildall.sh", "build_wheels.sh", "build_wheels.bat"]
+sdist-excludes = ["Dockerfile", "buildall.sh", "build_wheels.sh"]

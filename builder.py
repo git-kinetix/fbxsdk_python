@@ -29,13 +29,13 @@ from distutils.log import ERROR, INFO, set_threshold
 import os
 import sys
 
-from .buildable import BuildableModule
-from .builder import Builder
-from .exceptions import UserException
-from .installable import Installable
+from sipbuild.buildable import BuildableModule
+from sipbuild.builder import Builder
+from sipbuild.exceptions import UserException
+from sipbuild.installable import Installable
 
 
-class DistutilsBuilder(Builder):
+class FBXSDKBuilder(Builder):
     """ The implementation of a distutils-based project builder. """
 
     def build_executable(self, buildable, *, fatal=True):

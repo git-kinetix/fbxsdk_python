@@ -22,3 +22,4 @@ linux-libraries = ["xml2", "z"]
 linux-static-libraries = ["build/fbxsdk/lib/all/x64/release/libfbxsdk.a"]
 win-libraries = ["libfbxsdk-md", "zlib-md", "libxml2-md", "Advapi32", "Wininet"]
 win-py36-libraries = ["libfbxsdk-mt", "zlib-mt", "libxml2-mt", "Advapi32", "Wininet"]
+builder-factory = "builder.py"

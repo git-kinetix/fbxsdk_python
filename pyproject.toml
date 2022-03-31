@@ -6,7 +6,7 @@ build-backend = "sipbuild.api"
 # Specify the PEP 566 metadata for the project.
 [tool.sip.metadata]
 name = "fbxsdkpy"
-version = "2020.1"
+version = "2020.1-rev1"
 
 # Configure the building of the fib bindings.
 [tool.sip.bindings.fbx_module]

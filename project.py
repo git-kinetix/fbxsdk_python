@@ -46,9 +46,9 @@ class FBXSDKPyProject(Project):
         libraries = []
         if sys.platform == "win32":
             if sys.version_info.major == 3 and sys.version_info.minor < 7:
-                libraries = self.win_libraries
-            else:
                 libraries = self.win_py36_libraries
+            else:
+                libraries = self.win_libraries
         elif sys.platform == "linux":
             libraries = self.linux_libraries
         else:
@@ -58,11 +58,13 @@ class FBXSDKPyProject(Project):
 
     def setup(self, pyproject, tool, tool_description):
         self.verbose = True
-        if sys.platform == "win32":
-            super().run_command(["call create_sdist.bat"],fatal=True)
-        elif sys.platform == "linux":
-            super().run_command(["./create_sdist.sh"],fatal=True)
-        else:
-            raise Exception("Your platform "+sys.platform+" is not supported")
+        # don't download Autodesk's stuff when making sdist
+        if tool != "sdist":
+            if sys.platform == "win32":
+                super().run_command(["call pull_reqs.bat"],fatal=True)
+            elif sys.platform == "linux":
+                super().run_command(["./pull_reqs.sh"],fatal=True)
+            else:
+                raise Exception("Your platform "+sys.platform+" is not supported")
         super().setup(pyproject, tool, tool_description)
 

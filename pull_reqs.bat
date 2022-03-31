@@ -15,6 +15,5 @@ for /F "tokens=1,2 delims=;" %%i in (reqs_win.txt) do (
 curl -L -o "%BUILDDIR%\patch.py" "https://raw.githubusercontent.com/techtonik/python-patch/master/patch.py"
 python "%BUILDDIR%\patch.py" patch
 
-move "%BUILDDIR%\fbxsdk\lib\vs2017" "%BUILDDIR%\fbxsdk\lib\all"
+move "%BUILDDIR%\fbxsdk\lib\vs2017" "%BUILDDIR%\fbxsdk\lib\all" >nul
 popd
-pause

@@ -77,7 +77,7 @@ class FBXSDKBuilder(Builder):
                 installable.install(target_dir, installed)
 
         if project.distinfo:
-            from .distinfo import create_distinfo
+            from sipbuild.distinfo import create_distinfo
 
             create_distinfo(project.get_distinfo_dir(target_dir), wheel_tag,
                     installed, project.metadata, project.get_requires_dists(),

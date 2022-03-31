@@ -1,30 +1,23 @@
 # FBXSDK Python Bindings
 
-This repository contains scripts to create a Source Distribution (sdist) for the FBXSDK Python Bindings and build wheels (package with binaries) for various platforms and versions from it    
-**Packages for the Source Distribution and wheels can be installed with pip (see Install)**
+This the Source Distribution (sdist) repository for the FBXSDK Python Bindings     
+**Packages for the Source Distribution and wheels (prebuilt binaries) can be installed with pip (see Install)**    
 
 ## Install
 
 1. Obtain a [Gitlab Token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#creating-a-personal-access-token) to authenticate to the project pypi repository   
 2. Run the following command, with `<Gitlab Token>` replaced with your personal token :
 ```
-pip install --extra-index-url https://__token__:<Gitlab Token>@gitlab.inria.fr/api/v4/projects/18034/packages/pypi/simple fbxsdkpy
+pip --verbose install --extra-index-url https://__token__:<Gitlab Token>@gitlab.inria.fr/api/v4/projects/18034/packages/pypi/simple fbxsdkpy
 ```
-If there is no wheel available for your platform, pip will attempt to build from source using the Source Distribution
+If there is no wheel available for your platform, pip will attempt to build from source     
+To force an install from source, pass the `--no-binary` option to pip
 
-## Create a Source Distribution
+## Manual Build
 
-The Source distribution is obtained by downloading the FBXSDK libraries and Python Bindings for Linux and Windows from Autodesk, then patching them to work with sip5    
+Alternatively, the bindings can be built and installed by cloning this repository and running `pip --verbose install .`
 
-## Build wheels for package distribution
+### Remarks
 
-### GNU/Linux
-
-Wheels need to be built inside a manylinux2014 environment, a Docker image is used for that purpose     
-
-1. `docker run -t -v .:/fbxsdkpy`
-
-### Windows
-
-1. `build.bat`
-
+Instead of the libraries and bindings from Autodesk being included in the repository, they are downloaded before building    
+`--verbose` is recommended to get the output of the compiler in case of an error. Also, as compilation can take several minutes, `pip` might otherwise seem unresponsive

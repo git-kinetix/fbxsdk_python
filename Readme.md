@@ -19,6 +19,6 @@ Alternatively, the bindings can be built and installed by cloning this repositor
 
 ### Remarks
 
-Instead of the libraries and bindings from Autodesk being included in the repository, they are downloaded before building    
-`--verbose` is recommended to get the output of the compiler in case of an error. Also, as compilation can take several minutes, `pip` might otherwise seem unresponsive     
-On Windows, the installers from Autodesk trigger Permission Requests, if left unanswered they will timeout, the installation will continue without the required files and quietly fail. A solution to run the installation unattended is to do it from an Administrator command line
+- Instead of the libraries and bindings from Autodesk being included in the repository, they are downloaded before building    
+- `--verbose` is recommended to get the output of the compiler in case of an error. Also, as compilation can take several minutes, `pip` might otherwise seem unresponsive     
+- On Windows, the installers from Autodesk trigger Permission Requests, if left unanswered they will timeout, the installation will continue without the required files and quietly fail. A solution to run the installation unattended is to do it from an Administrator command line

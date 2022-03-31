@@ -1,23 +1,3 @@
-diff --git build/fbxpy/sip/fbxglobalsettings.sip build/fbxpy/sip/fbxglobalsettings.sip
-index d078d19..285b4e8 100644
---- build/fbxpy/sip/fbxglobalsettings.sip
-+++ build/fbxpy/sip/fbxglobalsettings.sip
-@@ -25,6 +25,8 @@ public:
-     FbxString GetDefaultCamera() const;
-
-     void SetTimeMode(FbxTime::EMode pTimeMode);
-+    void SetCustomFrameRate(double pFrameCustomRate);
-+    double GetCustomFrameRate() const;
-     FbxTime::EMode GetTimeMode();
-     void SetTimelineDefaultTimeSpan(const FbxTimeSpan& pTimeSpan);
-     void GetTimelineDefaultTimeSpan(FbxTimeSpan& pTimeSpan /Out/ ) const;
-@@ -32,4 +34,4 @@ public:
- protected:
-     FbxGlobalSettings(FbxManager& pManager, const char* pName);
-     virtual ~FbxGlobalSettings();
--};
-\ No newline at end of file
-+};
 diff --git build/fbxpy/sip/fbxmanager.sip build/fbxpy/sip/fbxmanager.sip
 index c0385df..229fff5 100644
 --- build/fbxpy/sip/fbxmanager.sip
@@ -73,25 +53,6 @@ index c670587..1f00c3c 100644
 -};
 \ No newline at end of file
 +};
-diff --git build/fbxpy/sip/fbxtypes.sip build/fbxpy/sip/fbxtypes.sip
-index a4f4350..02df462 100644
---- build/fbxpy/sip/fbxtypes.sip
-+++ build/fbxpy/sip/fbxtypes.sip
-@@ -27,14 +27,6 @@ enum EFbxType
- 	eFbxTypeCount	//!< Indicates the number of type identifiers constants.
- };
- 
--%If (FBX_X86)
--typedef unsigned int size_t;
--%End
--
--%If (FBX_X64)
--typedef unsigned long size_t;
--%End
--
-     class FbxBlob
-     {
-         public:
 diff --git build/fbxpy/sip/fbxvector2.sip build/fbxpy/sip/fbxvector2.sip
 index d0c7b47..53cb2ed 100644
 --- build/fbxpy/sip/fbxvector2.sip
@@ -136,7 +97,7 @@ index 3326b14..40134ff 100644
      struct InternalImpl;
  	struct InternalImpl32;
 --- build/fbxpy/sip/fbxaxissystem.sip	2020-07-07 16:58:16.000000000 +0200
-+++ build_/fbxpy/sip/fbxaxissystem.sip	2021-02-01 18:43:01.677585632 +0100
++++ build/fbxpy/sip/fbxaxissystem.sip	2021-02-01 18:43:01.677585632 +0100
 @@ -48,6 +48,7 @@
      static const FbxAxisSystem DirectX;
      static const FbxAxisSystem Lightwave;
@@ -146,7 +107,7 @@ index 3326b14..40134ff 100644
      void ConvertScene(FbxScene* pScene, FbxNode* pFbxRoot) const;
      
 --- build/fbxpy/sip/fbxcache.sip	2020-07-07 16:58:16.000000000 +0200
-+++ build_/fbxpy/sip/fbxcache.sip	2022-03-25 14:21:49.453753007 +0100
++++ build/fbxpy/sip/fbxcache.sip	2022-03-25 14:21:49.453753007 +0100
 @@ -287,7 +287,7 @@
                  int * lBuffer = new int[a3];
                  for (int i = 0; i < a3; ++i)
@@ -166,7 +127,7 @@ index 3326b14..40134ff 100644
                  
                  delete [] lBuffer;
 --- build/fbxpy/sip/fbxcluster.sip	2020-07-07 16:58:16.000000000 +0200
-+++ build_/fbxpy/sip/fbxcluster.sip	2022-03-25 14:49:18.494585392 +0100
++++ build/fbxpy/sip/fbxcluster.sip	2022-03-25 14:49:18.494585392 +0100
 @@ -58,7 +58,7 @@
  
      for (int i = 0; i < indicesCount; ++i)
@@ -184,7 +145,7 @@ index 3326b14..40134ff 100644
 \ No newline at end of file
 +};
 --- build/fbxpy/sip/fbxmesh.sip	2020-07-07 16:58:16.000000000 +0200
-+++ build_/fbxpy/sip/fbxmesh.sip	2022-03-25 14:50:52.525390324 +0100
++++ build/fbxpy/sip/fbxmesh.sip	2022-03-25 14:50:52.525390324 +0100
 @@ -40,7 +40,7 @@
      // corresponding Python object.
      for (int i = 0; i < polygonVertexCount; ++i)
@@ -195,7 +156,7 @@ index 3326b14..40134ff 100644
      }
  %End
 --- build/fbxpy/sip/fbxskin.sip	2020-07-07 16:58:16.000000000 +0200
-+++ build_/fbxpy/sip/fbxskin.sip	2022-03-25 14:50:37.908598534 +0100
++++ build/fbxpy/sip/fbxskin.sip	2022-03-25 14:50:37.908598534 +0100
 @@ -44,7 +44,7 @@
  
      for (int i = 0; i < indicesCount; ++i)
@@ -205,3 +166,37 @@ index 3326b14..40134ff 100644
          indices++;
      }
  %End
+--- build/fbxpy/sip/fbxglobalsettings.sip	2022-03-28 14:47:00.164024800 +0200
++++ build/fbxpy/sip/fbxglobalsettings.sip	2022-03-28 15:04:31.326006400 +0200
+@@ -25,6 +25,8 @@
+     FbxString GetDefaultCamera() const;
+     
+     void SetTimeMode(FbxTime::EMode pTimeMode);
++    void SetCustomFrameRate(double pFrameCustomRate);
++    double GetCustomFrameRate() const;
+     FbxTime::EMode GetTimeMode();
+     void SetTimelineDefaultTimeSpan(const FbxTimeSpan& pTimeSpan);
+     void GetTimelineDefaultTimeSpan(FbxTimeSpan& pTimeSpan /Out/ ) const;
+@@ -32,4 +34,4 @@
+ protected:
+     FbxGlobalSettings(FbxManager& pManager, const char* pName);
+     virtual ~FbxGlobalSettings();
+-};
+\ No newline at end of file
++};
+--- build/fbxpy/sip/fbxtypes.sip	2022-03-28 13:23:04.678965500 +0200
++++ build/fbxpy/sip/fbxtypes.sip	2022-03-28 15:10:15.157615400 +0200
+@@ -27,13 +27,6 @@
+ 	eFbxTypeCount	//!< Indicates the number of type identifiers constants.
+ };
+ 
+-%If (FBX_X86)
+-typedef unsigned int size_t;
+-%End
+-
+-%If (FBX_X64)
+-typedef unsigned long size_t;
+-%End
+ 
+     class FbxBlob
+     {

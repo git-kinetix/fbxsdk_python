@@ -24,6 +24,7 @@ then
   tar -xvzf "$tar" -C "$fbxsdkdir"
   printf "yes\nn\n" |"$fbxsdkdir"/fbx*fbxsdk_linux "$fbxsdkdir" >/dev/null 2>&1
   # patch libfbxsdk.so because it is not linked against libxml2 and libz for some reason  
+  chmod 777 ${fbxsdkdir}/lib/gcc/x64/release/libfbxsdk.so
   patchelf --add-needed libz.so.1 ${fbxsdkdir}/lib/gcc/x64/release/libfbxsdk.so
   patchelf --add-needed libxml2.so.2 ${fbxsdkdir}/lib/gcc/x64/release/libfbxsdk.so
   mv "${fbxsdkdir}/lib/gcc" "${fbxsdkdir}/lib/all"

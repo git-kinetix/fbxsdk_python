@@ -26,14 +26,6 @@ class FBXSDKPyProject(Project):
         )
         options.append(win_libs_option)
 
-        win_py36_libs_option = Option(
-            "win_py36_libraries",
-            help="a list of libraries needed on the windows platform for Python <=3.6",
-            option_type=list,
-            metavar="LIST",
-        )
-        options.append(win_py36_libs_option)
-
         linux_libs_option = Option(
             "linux_libraries",
             help="a list of libraries needed on the linux platform",
@@ -60,10 +52,7 @@ class FBXSDKPyProject(Project):
 
         libraries = []
         if sys.platform == "win32":
-            if sys.version_info.major == 3 and sys.version_info.minor < 7:
-                libraries = self.win_py36_libraries
-            else:
-                libraries = self.win_libraries
+            libraries = self.win_libraries
         elif sys.platform == "linux":
             libraries = self.linux_libraries
         else:

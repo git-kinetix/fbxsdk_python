@@ -1,5 +1,6 @@
 import os
 import sys
+# import ipdb
 
 from sipbuild import Option, Project
 
@@ -20,13 +21,17 @@ class FBXSDKPyProject(Project):
                 help="a list of libraries needed on the windows platform for Python >=3.7", option_type=list, metavar="LIST")
         options.append(win_libs_option)
 
-        win_py36_libs_option = Option('win36_libraries',
+        win_py36_libs_option = Option('win_py36_libraries',
                 help="a list of libraries needed on the windows platform for Python <=3.6", option_type=list, metavar="LIST")
         options.append(win_py36_libs_option)
 
         linux_libs_option = Option('linux_libraries',
                 help="a list of libraries needed on the linuxdows platform", option_type=list, metavar="LIST")
         options.append(linux_libs_option)
+
+        linux_static_libs_option = Option('linux_static_libraries',
+                help="a list of libraries needed on the linuxdows platform", option_type=list, metavar="LIST")
+        options.append(linux_static_libs_option)
 
         return options
 
@@ -39,14 +44,23 @@ class FBXSDKPyProject(Project):
         libraries = []
         if sys.platform == "win32":
             if sys.version_info.major == 3 and sys.version_info.minor < 7:
-                libraries = self.win_libs_option
+                libraries = self.win_libraries
             else:
-                libraries = self.win_py36_libs_option
+                libraries = self.win_py36_libraries
         elif sys.platform == "linux":
-            libraries = self.linux_libs_option
+            libraries = self.linux_libraries
         else:
             raise Exception("Your platform "+sys.platform+" is not supported")
 
         fbx_bindings.libraries.extend(libraries)
 
+    def setup(self, pyproject, tool, tool_description):
+        self.verbose = True
+        if sys.platform == "win32":
+            super().run_command(["call create_sdist.bat"],fatal=True)
+        elif sys.platform == "linux":
+            super().run_command(["./create_sdist.sh"],fatal=True)
+        else:
+            raise Exception("Your platform "+sys.platform+" is not supported")
+        super().setup(pyproject, tool, tool_description)
 

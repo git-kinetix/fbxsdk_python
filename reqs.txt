@@ -1,4 +1,2 @@
 fbxsdk;https://www.autodesk.com/content/dam/autodesk/www/adn/fbx/2020-1-1/fbx202011_fbxsdk_linux.tar.gz
 fbxpy;https://www.autodesk.com/content/dam/autodesk/www/adn/fbx/2020-1-1/fbx202011_fbxpythonbindings_linux.tar.gz
-fbxsdk;https://www.autodesk.com/content/dam/autodesk/www/adn/fbx/2020-1/fbx20201_fbxsdk_vs2017_win.exe
-fbxpy;https://www.autodesk.com/content/dam/autodesk/www/adn/fbx/2020-1/fbx20201_fbxpythonbindings_win.exe

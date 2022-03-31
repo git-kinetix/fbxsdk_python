@@ -135,3 +135,73 @@ index 3326b14..40134ff 100644
  
      struct InternalImpl;
  	struct InternalImpl32;
+--- build/fbxpy/sip/fbxaxissystem.sip	2020-07-07 16:58:16.000000000 +0200
++++ build_/fbxpy/sip/fbxaxissystem.sip	2021-02-01 18:43:01.677585632 +0100
+@@ -48,6 +48,7 @@
+     static const FbxAxisSystem DirectX;
+     static const FbxAxisSystem Lightwave;
+ 
++    void DeepConvertScene(FbxScene* pScene) const;
+     void ConvertScene(FbxScene* pScene) const;
+     void ConvertScene(FbxScene* pScene, FbxNode* pFbxRoot) const;
+     
+--- build/fbxpy/sip/fbxcache.sip	2020-07-07 16:58:16.000000000 +0200
++++ build_/fbxpy/sip/fbxcache.sip	2022-03-25 14:21:49.453753007 +0100
+@@ -287,7 +287,7 @@
+                 int * lBuffer = new int[a3];
+                 for (int i = 0; i < a3; ++i)
+                 {
+-                    lBuffer[i] = SIPLong_AsLong(PyList_GET_ITEM(a2, i));
++                    lBuffer[i] = sipLong_AsLong(PyList_GET_ITEM(a2, i));
+                 }
+                 sipCpp->Write(a0, *a1, lBuffer, a3);
+                 delete [] lBuffer;
+@@ -325,7 +325,7 @@
+                 sipCpp->Read(a0, *a1, lBuffer, a2);
+                 for (int i = 0; i < a2; ++i)
+                 {
+-                    PyList_SET_ITEM(sipRes, i, SIPLong_FromLong(lBuffer[i]));
++                    PyList_SET_ITEM(sipRes, i, PyLong_FromLong(lBuffer[i]));
+                 }
+                 
+                 delete [] lBuffer;
+--- build/fbxpy/sip/fbxcluster.sip	2020-07-07 16:58:16.000000000 +0200
++++ build_/fbxpy/sip/fbxcluster.sip	2022-03-25 14:49:18.494585392 +0100
+@@ -58,7 +58,7 @@
+ 
+     for (int i = 0; i < indicesCount; ++i)
+     {
+-        PyList_SET_ITEM(sipRes, i, SIPLong_FromLong(*indices));
++        PyList_SET_ITEM(sipRes, i, PyLong_FromLong(*indices));
+         indices++;
+     }
+ %End
+@@ -95,4 +95,4 @@
+ 
+ protected:
+     virtual ~FbxCluster();
+-};
+\ No newline at end of file
++};
+--- build/fbxpy/sip/fbxmesh.sip	2020-07-07 16:58:16.000000000 +0200
++++ build_/fbxpy/sip/fbxmesh.sip	2022-03-25 14:50:52.525390324 +0100
+@@ -40,7 +40,7 @@
+     // corresponding Python object.
+     for (int i = 0; i < polygonVertexCount; ++i)
+     {
+-        PyList_SET_ITEM(sipRes, i, SIPLong_FromLong(*vertices));
++        PyList_SET_ITEM(sipRes, i, PyLong_FromLong(*vertices));
+         vertices++;
+     }
+ %End
+--- build/fbxpy/sip/fbxskin.sip	2020-07-07 16:58:16.000000000 +0200
++++ build_/fbxpy/sip/fbxskin.sip	2022-03-25 14:50:37.908598534 +0100
+@@ -44,7 +44,7 @@
+ 
+     for (int i = 0; i < indicesCount; ++i)
+     {
+-        PyList_SET_ITEM(sipRes, i, SIPLong_FromLong(*indices));
++        PyList_SET_ITEM(sipRes, i, PyLong_FromLong(*indices));
+         indices++;
+     }
+ %End

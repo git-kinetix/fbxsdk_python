@@ -1,3 +1,23 @@
+diff --git build/fbxpy/sip/fbxglobalsettings.sip build/fbxpy/sip/fbxglobalsettings.sip
+index d078d19..285b4e8 100644
+--- build/fbxpy/sip/fbxglobalsettings.sip
++++ build/fbxpy/sip/fbxglobalsettings.sip
+@@ -25,6 +25,8 @@ public:
+     FbxString GetDefaultCamera() const;
+
+     void SetTimeMode(FbxTime::EMode pTimeMode);
++    void SetCustomFrameRate(double pFrameCustomRate);
++    double GetCustomFrameRate() const;
+     FbxTime::EMode GetTimeMode();
+     void SetTimelineDefaultTimeSpan(const FbxTimeSpan& pTimeSpan);
+     void GetTimelineDefaultTimeSpan(FbxTimeSpan& pTimeSpan /Out/ ) const;
+@@ -32,4 +34,4 @@ public:
+ protected:
+     FbxGlobalSettings(FbxManager& pManager, const char* pName);
+     virtual ~FbxGlobalSettings();
+-};
+\ No newline at end of file
++};
 diff --git build/fbxpy/sip/fbxmanager.sip build/fbxpy/sip/fbxmanager.sip
 index c0385df..229fff5 100644
 --- build/fbxpy/sip/fbxmanager.sip

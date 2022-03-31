@@ -19,7 +19,7 @@ then
   mkdir "$fbxsdkdir"
   url=$(grep 'fbx.*fbxsdk' $reqsfile)
   file=${url##*/}
-  tar="${fbxsdkdir}/${f}"
+  tar="${fbxsdkdir}/${file}"
   curl -L -o "$tar" $url
   tar -xvzf "$tar" -C "$fbxsdkdir"
   printf "yes\nn\n" |"$fbxsdkdir"/fbx*fbxsdk_linux "$fbxsdkdir"
@@ -36,7 +36,7 @@ then
   mkdir "$fbxpydir"
   url=$(grep 'fbx.*fbxpythonbindings_linux' $reqsfile)
   file=${url##*/}
-  tar="${fbxpydir}/${f}"
+  tar="${fbxpydir}/${file}"
   curl -L -o "$tar" $url
   tar -xvzf "$tar" -C "$fbxpydir"
   printf "yes\nn\n"|"$fbxpydir"/fbx*fbxpythonbindings_linux "$fbxpydir"

@@ -1,6 +1,10 @@
+[tool.cibuildwheel]
+before-all = "yum install -y libxml2-devel zlib-devel"
+build = "cp310-*"
+
 # Specify sip v5 as the build system for the package.
 [build-system]
-requires = ["sip >=5", "auditwheel", "patch"]
+requires = ["sip==5.5.0", "CPython", "patch"]
 build-backend = "sipbuild.api"
 
 # Specify the PEP 566 metadata for the project.

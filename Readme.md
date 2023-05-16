@@ -3,7 +3,14 @@
 This is a fork from this [repository](https://gitlab.inria.fr/radili/fbxsdk_python).
 
 The Source Distribution (sdist) repository for the FBXSDK Python Bindings     
-**Pre-compiled packages are available in PyNimation's package registry, they can be installed with pip (see PyNimation documentation)**    
+
+In order to build wheel with `cibuildwheel`, you need to run the following command:
+
+```shell
+cibuildwheel --platform linux --archs x86_64
+```
+
+Options are defined in the `pyproject.toml`, more options are available in the [docs](https://cibuildwheel.readthedocs.io/en/stable/options/).
 
 ## Build and install from source
 

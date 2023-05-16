@@ -1,5 +1,7 @@
 # FBXSDK Python Bindings
 
+This is a fork from this [repository](https://gitlab.inria.fr/radili/fbxsdk_python).
+
 The Source Distribution (sdist) repository for the FBXSDK Python Bindings     
 **Pre-compiled packages are available in PyNimation's package registry, they can be installed with pip (see PyNimation documentation)**    
 
